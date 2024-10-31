@@ -119,58 +119,56 @@ var r=n(9),i=r.Buffer;function a(e,t){for(var n in e)t[n]=e[n]}function o(e,t,n)
 				<div class="taskbar-time" ondblclick="showMessageBox({iconID: 'info', message: 'Time to get an old clock!'})"></div>
 			</div>
 		</div>
-		<div class="start-menu outset-deep" hidden style="display: none; z-index: 5001;">
-			<div class="start-menu-titlebar"></div>
-			<div class="start-menu-content">
-				<button id="loadWebamp">Load Webamp</button>
-				<script>
-        document.getElementById('loadWebamp').addEventListener('click', function() {
-            const Webamp = window.Webamp;
-            const webamp = new Webamp({
-                initialTracks: [
-                    {
-                        metaData: {
-                            artist: "DJ Mike Llama",
-                            title: "Llama Whippin' Intro",
+                <div class="start-menu outset-deep" style="display: block; z-index: 5001;">
+        <div class="start-menu-titlebar">Webamp Player</div>
+        <div class="start-menu-content">
+            <button id="loadWebamp">Load Webamp</button>
+            <div id="app"></div>
+            <script>
+                document.getElementById('loadWebamp').addEventListener('click', function() {
+                    const Webamp = window.Webamp;
+                    const webamp = new Webamp({
+                        initialTracks: [
+                            {
+                                metaData: {
+                                    artist: "DJ Mike Llama",
+                                    title: "Llama Whippin' Intro",
+                                },
+                                url: "https://cdn.jsdelivr.net/gh/captbaritone/webamp@43434d82cfe0e37286dbbe0666072dc3190a83bc/mp3/llama-2.91.mp3",
+                                duration: 5.322286,
+                            },
+                        ],
+                        __butterchurnOptions: {
+                            importButterchurn: () => Promise.resolve(window.butterchurn),
+                            getPresets: () => {
+                                const presets = window.butterchurnPresets.getPresets();
+                                return Object.keys(presets).map((name) => {
+                                    return {
+                                        name,
+                                        butterchurnPresetObject: presets[name],
+                                    };
+                                });
+                            },
+                            butterchurnOpen: true,
                         },
-                        url: "https://cdn.jsdelivr.net/gh/captbaritone/webamp@43434d82cfe0e37286dbbe0666072dc3190a83bc/mp3/llama-2.91.mp3",
-                        duration: 5.322286,
-                    },
-                ],
-                __butterchurnOptions: {
-                    importButterchurn: () => Promise.resolve(window.butterchurn),
-                    getPresets: () => {
-                        const presets = window.butterchurnPresets.getPresets();
-                        return Object.keys(presets).map((name) => {
-                            return {
-                                name,
-                                butterchurnPresetObject: presets[name],
-                            };
-                        });
-                    },
-                    butterchurnOpen: true,
-                },
-                windowLayout: {
-                    main: { position: { top: 0, left: 0 } },
-                    equalizer: { position: { top: 116, left: 0 } },
-                    playlist: {
-                        position: { top: 232, left: 0 },
-                        size: { extraWidth: 0, extraHeight: 4 },
-                    },
-                    milkdrop: {
-                        position: { top: 0, left: 275 },
-                        size: { extraHeight: 12, extraWidth: 7 },
-                    },
-                },
-            });
-            webamp.renderWhenReady(document.getElementById("app"));
-        });
-    </script>
-			</div>
-		</div>
-		<div id="app" style="height: 100vh">
-      <!-- Webamp will attempt to center itself within this div -->
-                </div>
+                        windowLayout: {
+                            main: { position: { top: 0, left: 0 } },
+                            equalizer: { position: { top: 116, left: 0 } },
+                            playlist: {
+                                position: { top: 232, left: 0 },
+                                size: { extraWidth: 0, extraHeight: 4 },
+                            },
+                            milkdrop: {
+                                position: { top: 0, left: 275 },
+                                size: { extraHeight: 12, extraWidth: 7 },
+                            },
+                        },
+                    });
+                    webamp.renderWhenReady(document.getElementById("app"));
+                });
+            </script>
+        </div>
+    </div>
 		<script src="lib/jquery.min.js"></script>
 		<script src="lib/browserfs.js"></script>
 		<script src="lib/clippy.js/build/clippy.js"></script>
